@@ -8,7 +8,6 @@
         startTime = Date.now();
         document.getElementById('startBtn').disabled = true;
         document.getElementById('nextBtn').disabled = false;
-        // Show the passage when start is clicked
         document.getElementById('passage').style.display = 'block';
     }
 
@@ -22,7 +21,6 @@
 </head>
 <body>
     <h1>Reading Test</h1>
-    <!-- Passage is hidden initially -->
     <p id="passage" style="display:none;">{{ passage }}</p>
     <button id="startBtn" onclick="startReading()">Start Reading</button>
     <button id="nextBtn" onclick="finishReading()" disabled>Next</button>
