@@ -37,12 +37,22 @@ def results():
         qid = str(q["id"])
         user_answer = user_answers.get(qid, "").strip().lower()
         correct_answer = q["answer"].strip().lower()
-        if user_answer == correct_answer:
-            correct_count += 1
+
+        if correct_answer == "water and food":
+            # Accept answers that contain "water" or "food"
+            if ("water" in user_answer and "food" in user_answer) or user_answer == "water" or user_answer == "food":
+                correct_count += 1
+        else:
+            if user_answer == correct_answer:
+                correct_count += 1
     accuracy = correct_count / len(QUESTIONS)
     speed_score = max(0, 100 - reading_time)  # example speed score calculation
     total_score = accuracy * 70 + (speed_score / 100) * 30  # weighted score
-    return render_template('results.html', accuracy=accuracy, reading_time=reading_time, total_score=total_score)
-
+    return render_template(
+        'results.html',
+        accuracy=int(round(accuracy * 100)),
+        reading_time=int(round(reading_time)),
+        total_score=int(round(total_score))
+    )
 if __name__ == '__main__':
     app.run(debug=True)
