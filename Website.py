@@ -33,26 +33,37 @@ def results():
     reading_time = session.get('reading_time', 0)
     user_answers = request.form
     correct_count = 0
+
     for q in QUESTIONS:
         qid = str(q["id"])
         user_answer = user_answers.get(qid, "").strip().lower()
         correct_answer = q["answer"].strip().lower()
 
+        # Flexible matching for "water and food"
         if correct_answer == "water and food":
-            # Accept answers that contain "water" or "food"
             if ("water" in user_answer and "food" in user_answer) or user_answer == "water" or user_answer == "food":
                 correct_count += 1
-        else:
-            if user_answer == correct_answer:
+
+        # Flexible matching for "under a bush"
+        elif correct_answer == "under a bush":
+            bush_keywords = ["under a bush", "in a bush", "bush", "a bush"]
+            if any(phrase in user_answer for phrase in bush_keywords):
                 correct_count += 1
+
+        # Default strict match
+        elif user_answer == correct_answer:
+            correct_count += 1
+
     accuracy = correct_count / len(QUESTIONS)
-    speed_score = max(0, 100 - reading_time)  # example speed score calculation
-    total_score = accuracy * 70 + (speed_score / 100) * 30  # weighted score
+    speed_score = max(0, 100 - reading_time)
+    total_score = accuracy * 70 + (speed_score / 100) * 30
+
     return render_template(
         'results.html',
         accuracy=int(round(accuracy * 100)),
         reading_time=int(round(reading_time)),
         total_score=int(round(total_score))
     )
+
 if __name__ == '__main__':
     app.run(debug=True)
