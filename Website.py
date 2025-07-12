@@ -1,13 +1,17 @@
 from flask import Flask, render_template, request, redirect, url_for, session
 
 app = Flask(__name__)
-app.secret_key = 'your_secret_key_here'  # needed for session
+app.secret_key = 'f2d3a3c9e2b94d1f9e7a4b8c2d5f6a1b'
 
 # Sample passage and questions
-PASSAGE = "This is a sample reading passage. Please read it carefully."
+PASSAGE = """
+One sunny afternoon, a young girl named Emma was walking home from school when she heard a faint whimpering sound. Following the noise, she found a small puppy stuck under a bush. The puppy looked scared and hungry. Emma gently picked it up and decided to take it home. She gave the puppy some water and food, and soon the puppy was wagging its tail happily. Emma named the puppy Max and promised to take care of him forever.
+"""
 QUESTIONS = [
-    {"id": 1, "question": "What is the main topic of the passage?", "answer": "reading"},
-    {"id": 2, "question": "Is this passage long or short?", "answer": "short"},
+    {"id": 1, "question": "Who found the puppy?", "answer": "emma"},
+    {"id": 2, "question": "Where was the puppy stuck?", "answer": "under a bush"},
+    {"id": 3, "question": "What did Emma give the puppy?", "answer": "water and food"},
+    {"id": 4, "question": "What did Emma name the puppy?", "answer": "max"},
 ]
 
 @app.route('/')
@@ -31,7 +35,9 @@ def results():
     correct_count = 0
     for q in QUESTIONS:
         qid = str(q["id"])
-        if user_answers.get(qid, "").strip().lower() == q["answer"].lower():
+        user_answer = user_answers.get(qid, "").strip().lower()
+        correct_answer = q["answer"].strip().lower()
+        if user_answer == correct_answer:
             correct_count += 1
     accuracy = correct_count / len(QUESTIONS)
     speed_score = max(0, 100 - reading_time)  # example speed score calculation
