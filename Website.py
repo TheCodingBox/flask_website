@@ -4,9 +4,8 @@ app = Flask(__name__)
 app.secret_key = 'f2d3a3c9e2b94d1f9e7a4b8c2d5f6a1b'
 
 # Reading passage and questions
-PASSAGE = """
-One sunny afternoon, a young girl named Emma was walking home from school when she heard a faint whimpering sound. Following the noise, she found a small puppy stuck under a bush. The puppy looked scared and hungry. Emma gently picked it up and decided to take it home. She gave the puppy some water and food, and soon the puppy was wagging its tail happily. Emma named the puppy Max and promised to take care of him forever.
-"""
+PASSAGE = PASSAGE = """One sunny afternoon, a young girl named Emma was walking home from school\nwhen she heard a faint whimpering sound. Following the noise,\nshe found a small puppy stuck under a bush. The puppy looked scared and hungry.\nEmma gently picked it up and decided to take it home. She gave the puppy some water and food,\nand soon the puppy was wagging its tail happily. Emma named the puppy Max and promised\nto take care of him forever."""
+
 
 QUESTIONS = [
     {"id": 1, "question": "Who found the puppy?", "answer": "emma"},
