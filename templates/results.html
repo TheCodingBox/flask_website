@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Results</title>
+</head>
+<body>
+    <h2>Results</h2>
+    <p>Accuracy: {{ (accuracy * 100) | round(2) }}%</p>
+    <p>Time Taken: {{ reading_time | round(2) }} seconds</p>
+    <p>Total Score: {{ total_score | round(2) }}</p>
+    <a href="{{ url_for('index') }}">Try Again</a>
+</body>
+</html>

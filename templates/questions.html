@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Comprehension Questions</title>
+</head>
+<body>
+    <h2>Answer these comprehension questions</h2>
+    <form method="POST" action="{{ url_for('results') }}">
+        {% for q in questions %}
+            <label for="q{{ q.id }}">{{ q.question }}</label><br>
+            <input type="text" id="q{{ q.id }}" name="{{ q.id }}" required><br><br>
+        {% endfor %}
+        <button type="submit">Submit Answers</button>
+    </form>
+</body>
+</html>
